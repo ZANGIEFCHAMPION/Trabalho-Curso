@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Página 3 - Quiz Final</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+
+<body>
+ <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0d6efd;">
+  <div class="container">
+    <a class="navbar-brand" href="#">Desenvolvimento De Sistemas</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="Inicial.html">Início</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="page2.html">O que eu aprendi</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="page3.html">Quiz Final</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="container mt-5">
+    <h1 class="text-center">Quiz do Curso</h1>
+
+    <form id="quizForm">
+
+      <div class="mb-4">
+        <label class="form-label"><strong>Quem foi o melhor? (Escolha um ou mais)</strong></label><br>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="melhor[]" value="Clevinton"> Clevinton<br>
+          <input class="form-check-input" type="checkbox" name="melhor[]" value="Allison"> Allison<br>
+          <input class="form-check-input" type="checkbox" name="melhor[]" value="Monica / Jesus"> Monica / Jesus<br>
+          <input class="form-check-input" type="checkbox" name="melhor[]" value="Alexandre"> Alexandre<br>
+          <input class="form-check-input" type="checkbox" name="melhor[]" value="Jesus"> Jesus<br>
+        </div>
+      </div>
+
+      <hr />
+
+
+      <h3 class="mb-3">Perguntas Técnicas</h3>
+
+      <div class="mb-3">
+        <label><strong>1. HTML é uma linguagem de:</strong></label><br>
+        <input class="form-check-input" type="radio" name="q1" value="Marcação"> Marcação<br>
+        <input class="form-check-input" type="radio" name="q1" value="Programação"> Programação<br>
+      </div>
+
+      <div class="mb-3">
+        <label><strong>2. CSS serve para:</strong></label><br>
+        <input class="form-check-input" type="radio" name="q2" value="Estilizar"> Estilizar<br>
+        <input class="form-check-input" type="radio" name="q2" value="Programar"> Programar<br>
+      </div>
+
+      <div class="mb-3">
+        <label><strong>3. Qual dessas linguagens é usada para interatividade na web?</strong></label><br>
+        <input class="form-check-input" type="radio" name="q3" value="JavaScript"> JavaScript<br>
+        <input class="form-check-input" type="radio" name="q3" value="HTML"> HTML<br>
+      </div>
+
+      <div class="mb-3">
+        <label><strong>4. Qual ferramenta usamos para versionamento de código?</strong></label><br>
+        <input class="form-check-input" type="radio" name="q4" value="GitHub"> GitHub<br>
+        <input class="form-check-input" type="radio" name="q4" value="MySQL"> MySQL<br>
+      </div>
+
+      <div class="mb-3">
+        <label><strong>5. Qual desses é um banco de dados?</strong></label><br>
+        <input class="form-check-input" type="radio" name="q5" value="MySQL"> MySQL<br>
+        <input class="form-check-input" type="radio" name="q5" value="CSS"> CSS<br>
+      </div>
+
+      <hr />
+
+
+      <h3 class="mb-3">Perguntas Pessoais</h3>
+
+      <div class="mb-2">
+        <label>Vai continuar na profissão?</label><br>
+        <input type="radio" name="continuar" value="Sim"> Sim
+        <input type="radio" name="continuar" value="Não"> Não
+      </div>
+
+      <div class="mb-2">
+        <label>Vai fazer faculdade?</label><br>
+        <input type="radio" name="faculdade" value="Sim"> Sim
+        <input type="radio" name="faculdade" value="Não"> Não
+      </div>
+
+      <div class="mb-2">
+        <label>Vai fazer curso de programação?</label><br>
+        <input type="radio" name="curso" value="Sim"> Sim
+        <input type="radio" name="curso" value="Não"> Não
+      </div>
+
+      <div class="mb-2">
+        <label>Vai parar o curso?</label><br>
+        <input type="radio" name="parar" value="Sim"> Sim
+        <input type="radio" name="parar" value="Não"> Não
+      </div>
+
+      <div class="text-center mt-4">
+        <button type="submit" class="btn btn-primary btn-lg">Enviar Respostas</button>
+      </div>
+    </form>
+  </div>
+
+  <footer>
+    <p class="mb-0">Nome: Gustavo Henrique do Nascimento Parreiras</p>
+    <p class="mb-0">Turma: 3º Desenvolvimento de Sistemas</p>
+  </footer>
+
+  <script>
+    document.getElementById('quizForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const formData = new FormData(form);
+
+      fetch('salvar_respostas.php', {
+        method: 'POST',
+        body: formData
+      })
+        .then(res => res.text())
+        .then(mensagem => {
+          alert(mensagem);
+          form.reset();
+        })
+        .catch(error => {
+          alert("Erro ao enviar: " + error);
+        });
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
